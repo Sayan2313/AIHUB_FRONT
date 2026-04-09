@@ -11,6 +11,4 @@ export interface ModelOption {
   latency: string
   pricing: string
   playgroundPath?: string
-  // Optional flag: when true, the UI can highlight this model as featured.
-  featured?: boolean
 }

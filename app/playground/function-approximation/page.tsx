@@ -1,11 +1,10 @@
+import { AppShell } from "@/components/AppShell"
 import { FunctionApproximationPlayground } from "@/components/FunctionApproximationPlayground"
-import { Navbar } from "@/components/Navbar"
 
 export default function FunctionApproximationPage() {
   return (
-    <main className="min-h-screen bg-background">
-      <Navbar />
+    <AppShell>
       <FunctionApproximationPlayground />
-    </main>
+    </AppShell>
   )
 }

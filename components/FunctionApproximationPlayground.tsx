@@ -4,6 +4,8 @@ import type { FormEvent } from "react"
 import { useState } from "react"
 
 import { FunctionGraph } from "@/components/FunctionGraph"
+import { buildApiUrl } from "@/lib/api"
+import { formatDurationMs } from "@/lib/format"
 import { generateFunctionPoints } from "@/lib/function-expression"
 import type {
   ActivationFunction,
@@ -12,14 +14,11 @@ import type {
   FunctionApproximationResponse,
 } from "@/types/function-playground"
 
-const apiBaseUrl =
-  process.env.NEXT_PUBLIC_FASTAPI_BASE_URL?.replace(/\/$/, "") ?? "http://localhost:8000"
-
 const initialForm: FunctionApproximationRequest = {
-  expression: "10*x + 3",
-  xMin: -10,
-  xMax: 10,
-  points: 100,
+  expression: "sin(x)",
+  xMin: -5,
+  xMax: 5,
+  points: 200,
   neuronsPerLayer: [64, 64],
   epochs: 500,
   seed: 42,
@@ -121,14 +120,6 @@ export function FunctionApproximationPlayground() {
 
   const parameterCount = calculateParameterCount(form.neuronsPerLayer)
 
-  function formatTrainingTime(durationMs: number) {
-    if (durationMs >= 1000) {
-      return `${(durationMs / 1000).toFixed(durationMs >= 10000 ? 0 : 2)} s`
-    }
-
-    return `${Math.round(durationMs)} ms`
-  }
-
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(true)
@@ -142,7 +133,7 @@ export function FunctionApproximationPlayground() {
         form.points
       )
 
-      const response = await fetch(`${apiBaseUrl}/api/funcapproximate/`, {
+      const response = await fetch(buildApiUrl("/api/funcapproximate/"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -310,7 +301,7 @@ export function FunctionApproximationPlayground() {
 
             <div className="rounded-3xl border border-border/70 bg-muted/25 p-4">
               <div className="mb-4">
-                <p className="text-sm font-semibold text-foreground">Training Settings</p>
+                <p className="text-sm font-semibold text-foreground">Training Configuration</p>
                 <p className="mt-1 text-sm text-muted-foreground">
                   Adjust optimization and initialization before sending the request.
                 </p>
@@ -420,7 +411,7 @@ export function FunctionApproximationPlayground() {
               </p>
               {trainTimeMs !== null ? (
                 <p className="mt-2 text-1xl text-muted-foreground">
-                  Training Time: {formatTrainingTime(trainTimeMs)}
+                  Training Time: {formatDurationMs(trainTimeMs)}
                 </p>
               ) : null}
             </div>

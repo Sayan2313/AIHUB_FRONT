@@ -3,15 +3,25 @@ const pricingSymbol:string = "\u20B9"
 export const modelOptions: ModelOption[] = [
   {
     id: "function-approximation",
-    name: "Function-approximation",
+    name: "FuncFit",
     summary: "Built for approximate functions",
     description:
         "A good option for understanding how neural networks approximate function",
     capabilities: ["function"],
     latency: "Low",
-    pricing: pricingSymbol + "101",
+    pricing: pricingSymbol + " 101",
     playgroundPath: "/playground/function-approximation",
-    featured: true
+  },
+  {
+    id: "senti",
+    name: "Senti",
+    summary: "Analyse Sentiments of given sentence",
+    description:
+        "Analyse given the given text, and return a sentiment label with confidence score",
+    capabilities: ["text"],
+    latency: "Low",
+    pricing: pricingSymbol + "101",
+    playgroundPath: "/playground/senti",
   },
   {
     id: "peak",
@@ -21,16 +31,6 @@ export const modelOptions: ModelOption[] = [
         "Optimized for quick turnaround when users want simple answers, brainstorming, or everyday assistant flows.",
     capabilities: ["text"],
     latency: "Low",
-    pricing: pricingSymbol + "101",
-  },
-  {
-    id: "insight-pro",
-    name: "Insight Pro",
-    summary: "Best for long-form reasoning and detailed answers.",
-    description:
-      "Use this model when users need reliable multi-step analysis, summaries, and research-style responses.",
-    capabilities: ["text"],
-    latency: "Medium",
     pricing: pricingSymbol + "101",
   },
 
