@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { RoundedBox, Sparkles } from "@react-three/drei"
 import { Group, MathUtils, MeshStandardMaterial } from "three"
 
-type Emotion = "idle" | "happy" | "sad" | "surprised" | "thinking" | "excited"
+type Emotion = "idle" | "happy" | "surprised" | "sad" |"thinking" | "excited"
 
 interface EyeTarget {
   x: number
@@ -40,7 +40,7 @@ interface EmotionTarget {
   head: HeadTarget
 }
 
-const EMOTION_SEQUENCE: Emotion[] = ["idle", "happy", "thinking", "surprised", "sad", "excited"]
+const EMOTION_SEQUENCE: Emotion[] = ["happy", "thinking", "surprised", "sad", "excited"]
 
 const EMOTION_TARGETS: Record<Emotion, EmotionTarget> = {
   idle: {
@@ -54,7 +54,7 @@ const EMOTION_TARGETS: Record<Emotion, EmotionTarget> = {
       cornerRotation: 0.2,
       cornerScaleY: 0.08,
     },
-    head: { rotateX: -0.04, rotateY: 0.18, rotateZ: -0.03, bounce: 0.08, glow: 1.8, jitter: 0 },
+    head: { rotateX: -0.04, rotateY: 0, rotateZ: -0.03, bounce: 0.08, glow: 1.8, jitter: 0 },
   },
   happy: {
     leftEye: { x: -0.48, y: 0.27, scaleX: 0.36, scaleY: 0.1, rotationZ: -0.2 },
@@ -67,7 +67,7 @@ const EMOTION_TARGETS: Record<Emotion, EmotionTarget> = {
       cornerRotation: 0.78,
       cornerScaleY: 0.12,
     },
-    head: { rotateX: -0.02, rotateY: 0.2, rotateZ: 0.02, bounce: 0.16, glow: 2.2, jitter: 0 },
+    head: { rotateX: -0.02, rotateY: 0, rotateZ: 0.02, bounce: 0.16, glow: 2.2, jitter: 0 },
   },
   sad: {
     leftEye: { x: -0.5, y: 0.16, scaleX: 0.32, scaleY: 0.1, rotationZ: 0.24 },
@@ -80,7 +80,7 @@ const EMOTION_TARGETS: Record<Emotion, EmotionTarget> = {
       cornerRotation: -0.58,
       cornerScaleY: 0.1,
     },
-    head: { rotateX: 0.08, rotateY: 0.08, rotateZ: -0.08, bounce: 0.03, glow: 1.4, jitter: 0 },
+    head: { rotateX: 0.08, rotateY: 0, rotateZ: -0.08, bounce: 0.03, glow: 1.4, jitter: 0 },
   },
   surprised: {
     leftEye: { x: -0.48, y: 0.24, scaleX: 0.22, scaleY: 0.34, rotationZ: 0 },
@@ -93,7 +93,7 @@ const EMOTION_TARGETS: Record<Emotion, EmotionTarget> = {
       cornerRotation: 0,
       cornerScaleY: 0.02,
     },
-    head: { rotateX: -0.12, rotateY: 0.14, rotateZ: 0.08, bounce: 0.2, glow: 2.6, jitter: 0 },
+    head: { rotateX: -0.12, rotateY: 0, rotateZ: 0.08, bounce: 0.2, glow: 2.6, jitter: 0 },
   },
   thinking: {
     leftEye: { x: -0.5, y: 0.22, scaleX: 0.34, scaleY: 0.08, rotationZ: 0.16 },
@@ -106,7 +106,7 @@ const EMOTION_TARGETS: Record<Emotion, EmotionTarget> = {
       cornerRotation: 0.1,
       cornerScaleY: 0.05,
     },
-    head: { rotateX: -0.02, rotateY: 0.34, rotateZ: -0.1, bounce: 0.09, glow: 1.9, jitter: 0 },
+    head: { rotateX: -0.02, rotateY: 0, rotateZ: -0.1, bounce: 0.09, glow: 1.9, jitter: 0 },
   },
   excited: {
     leftEye: { x: -0.46, y: 0.28, scaleX: 0.28, scaleY: 0.18, rotationZ: 0.08 },
@@ -119,7 +119,7 @@ const EMOTION_TARGETS: Record<Emotion, EmotionTarget> = {
       cornerRotation: 0.88,
       cornerScaleY: 0.12,
     },
-    head: { rotateX: -0.04, rotateY: 0.16, rotateZ: 0.03, bounce: 0.18, glow: 2.8, jitter: 0.018 },
+    head: { rotateX: -0.04, rotateY: 0, rotateZ: 0.03, bounce: 0.18, glow: 2.8, jitter: 0.018 },
   },
 }
 
@@ -559,7 +559,6 @@ function Scene({
 }) {
   return (
     <>
-      <fog attach="fog" args={["#060a12", 8, 18]} />
       <ambientLight intensity={0.85} color="#9bb9ff" />
       <directionalLight position={[4, 5, 5]} intensity={2.4} color="#ffffff" />
       <directionalLight position={[-4, 1.8, 3]} intensity={1.25} color="#5eead4" />
@@ -587,6 +586,18 @@ export default function RobotMascotScene() {
   const [emotion, setEmotion] = useState<Emotion>("idle")
   const [hovered, setHovered] = useState(false)
   const [pointer, setPointer] = useState({ x: 0, y: 0 })
+  const [showBubble, setShowBubble] = useState(true)
+  const [bubbleFading, setBubbleFading] = useState(false)
+
+  // Auto-dismiss the welcome bubble after a delay.
+  useEffect(() => {
+    const fadeTimer = window.setTimeout(() => setBubbleFading(true), 3500)
+    const hideTimer = window.setTimeout(() => setShowBubble(false), 4400)
+    return () => {
+      window.clearTimeout(fadeTimer)
+      window.clearTimeout(hideTimer)
+    }
+  }, [])
 
   useEffect(() => {
     let active = true
@@ -655,6 +666,17 @@ export default function RobotMascotScene() {
       >
         <Scene emotion={emotion} hovered={hovered} pointer={pointer} />
       </Canvas>
+
+      {/* Comic-book speech bubble */}
+      {showBubble && (
+        <div
+          className={`comic-bubble ${bubbleFading ? "comic-bubble-out" : "comic-bubble-in"}`}
+        >
+          <span className="comic-bubble-text">Welcome!</span>
+          {/* Tail pointing down toward the robot */}
+          <div className="comic-bubble-tail" />
+        </div>
+      )}
     </div>
   )
 }

@@ -25,6 +25,10 @@ const modelIcons: Record<string, { src: string; alt: string }> = {
     src: "/sentiment-analysis.svg",
     alt: "Sentiment analysis model icon",
   },
+  qwen: {
+    src: "/Qwen_logo.svg",
+    alt: "Qwen model icon",
+  },
 }
 
 interface ModelCardProps {

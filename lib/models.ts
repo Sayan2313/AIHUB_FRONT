@@ -24,11 +24,22 @@ export const modelOptions: ModelOption[] = [
     playgroundPath: "/playground/senti",
   },
   {
-    id: "peak",
-    name: "Peak",
+    id: "qwen",
+    name: "Qwen",
     summary: "Fast responses for chats",
     description:
-        "Optimized for quick turnaround when users want simple answers, brainstorming, or everyday assistant flows.",
+        "Good for conversional chats and quick responses",
+    capabilities: ["text"],
+    latency: "Medium",
+    pricing: pricingSymbol + "101",
+    playgroundPath: "/playground/qwen",
+  },
+  {
+    id: "peak",
+    name: "Peak",
+    summary: "Still under development",
+    description:
+        "No description Available",
     capabilities: ["text"],
     latency: "Low",
     pricing: pricingSymbol + "101",
