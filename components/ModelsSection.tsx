@@ -1,11 +1,11 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import { modelOptions } from "@/lib/models"
 import { ModelCard } from "@/components/ModelCard"
 import { TypewriterText } from "@/components/TypewriterText"
 
-const sectionVariants = {
+const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -19,7 +19,7 @@ const sectionVariants = {
   },
 }
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
