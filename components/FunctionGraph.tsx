@@ -127,7 +127,7 @@ export function FunctionGraph({
 
       if (chartNode) {
         void import("plotly.js-basic-dist-min").then((Plotly) => {
-          ;(Plotly.default as PlotlyInstance).purge(chartNode)
+          ; (Plotly.default as PlotlyInstance).purge(chartNode)
         })
       }
     }

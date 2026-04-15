@@ -2,7 +2,7 @@
 
 import type { FormEvent } from "react"
 import { useState } from "react"
-import { buildApiUrl } from "@/lib/api"
+import { buildApiUrl, extractFetchError } from "@/lib/api"
 import { formatDurationMs } from "@/lib/format"
 import { buildSentimentRequest, sentiApiPath, sentiSamplePrompts } from "@/lib/senti"
 import type { SentimentPrediction, SentimentResponse } from "@/types/senti-playground"
@@ -37,7 +37,8 @@ export function SentiPlayground() {
       })
 
       if (!response.ok) {
-        throw new Error("Backend request failed.")
+        const detail = await extractFetchError(response, "Backend request failed")
+        throw new Error(detail)
       }
 
       const payload = (await response.json()) as SentimentResponse

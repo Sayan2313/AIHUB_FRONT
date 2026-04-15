@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { RoundedBox, Sparkles } from "@react-three/drei"
 import { Group, MathUtils, MeshStandardMaterial } from "three"
 
-type Emotion = "idle" | "happy" | "surprised" | "sad" |"thinking" | "excited"
+type Emotion = "idle" | "happy" | "surprised" | "sad" | "thinking" | "excited"
 
 interface EyeTarget {
   x: number
@@ -144,6 +144,7 @@ function RobotActor({
 
   const current = useRef(structuredClone(EMOTION_TARGETS.idle))
   useFrame((state, delta) => {
+
     const t = state.clock.elapsedTime
     const target = hovered
       ? {
@@ -289,14 +290,21 @@ function RobotActor({
       delta
     )
 
-    const blinkBase = Math.sin(t * 0.43 + 1.7) > 0.992 ? 0.12 : 1
-    const blinkSecondary = Math.sin(t * 0.31 + 0.3) > 0.998 ? 0.08 : 1
+    const blinkBase = Math.sin(t * 2.5) > 0.98 ? 0.05 : 1
+    const blinkSecondary = Math.sin(t * 1.4 + 1.2) > 0.99 ? 0.05 : 1
     const randomBlink = Math.min(blinkBase, blinkSecondary)
     const excitedBlink = emotion === "excited" ? 0.65 + Math.sin(t * 18) * 0.25 : 1
-    const blinkScale = Math.max(0.06, Math.min(randomBlink, excitedBlink))
+    const blinkScale = Math.max(0.05, Math.min(randomBlink, excitedBlink))
 
     if (root.current) {
-      root.current.position.y = Math.sin(t * 1.2) * current.current.head.bounce
+      // Breathing animation (slow scale pulsing)
+      const breathPulse = Math.sin(t * 1.5)
+      const scaleX = 0.8 + breathPulse * 0.006
+      const scaleY = 0.8 + breathPulse * 0.016
+      const scaleZ = 0.8 + breathPulse * 0.006
+      root.current.scale.set(scaleX, scaleY, scaleZ)
+
+      root.current.position.y = Math.sin(t * 1.2) * current.current.head.bounce + Math.sin(t * 0.5) * 0.015
       root.current.rotation.x =
         current.current.head.rotateX + Math.sin(t * 0.8) * 0.02 - pointer.y * 0.08
       root.current.rotation.y =
@@ -305,6 +313,7 @@ function RobotActor({
         current.current.head.rotateZ +
         Math.sin(t * 0.9) * 0.015 +
         (current.current.head.jitter > 0 ? Math.sin(t * 45) * current.current.head.jitter : 0)
+
     }
 
     if (leftEye.current) {
@@ -630,8 +639,6 @@ export default function RobotMascotScene() {
       return () => window.clearTimeout(timer)
     }
   }, [emotion, hovered])
-
-  const emotionLabel = emotion.charAt(0).toUpperCase() + emotion.slice(1)
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect()

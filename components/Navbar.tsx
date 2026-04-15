@@ -49,11 +49,10 @@ export function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className={`rounded-full px-3 py-2 text-sm transition-colors hover:bg-muted hover:text-foreground sm:px-4 ${
-                link.label === "Home"
+              className={`rounded-full px-3 py-2 text-sm transition-colors hover:bg-muted hover:text-foreground sm:px-4 ${link.label === "Home"
                   ? "bg-foreground font-medium text-background"
                   : "text-muted-foreground"
-              }`}
+                }`}
             >
               {link.label}
             </Link>

@@ -131,11 +131,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   html {
     @apply min-h-full font-mono;
     background-color: var(--background);
     color: var(--foreground);
   }
+
   body {
     @apply min-h-screen bg-background text-foreground;
     background-color: var(--background);
@@ -163,10 +165,12 @@
 }
 
 @keyframes caret-blink {
+
   0%,
   49% {
     opacity: 1;
   }
+
   50%,
   100% {
     opacity: 0;
@@ -196,12 +200,14 @@
 }
 
 @keyframes qwen-bounce {
+
   0%,
   60%,
   100% {
     transform: translateY(0);
     opacity: 0.4;
   }
+
   30% {
     transform: translateY(-6px);
     opacity: 1;
@@ -275,10 +281,12 @@
     opacity: 0;
     transform: translate(-50%, 12px) scale(0.3) rotate(-6deg);
   }
+
   60% {
     opacity: 1;
     transform: translate(-50%, -4px) scale(1.08) rotate(1deg);
   }
+
   100% {
     opacity: 1;
     transform: translate(-50%, 0) scale(1) rotate(0deg);
@@ -290,6 +298,7 @@
     opacity: 1;
     transform: translate(-50%, 0) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translate(-50%, -16px) scale(0.7);

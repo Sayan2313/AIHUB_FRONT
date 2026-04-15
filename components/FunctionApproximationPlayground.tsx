@@ -1,17 +1,17 @@
 "use client"
 
-import type { FormEvent } from "react"
-import { useState } from "react"
+import type {FormEvent} from "react"
+import {useState} from "react"
 
-import { FunctionGraph } from "@/components/FunctionGraph"
-import { buildApiUrl } from "@/lib/api"
-import { formatDurationMs } from "@/lib/format"
-import { generateFunctionPoints } from "@/lib/function-expression"
+import {FunctionGraph} from "@/components/FunctionGraph"
+import {buildApiUrl} from "@/lib/api"
+import {formatDurationMs} from "@/lib/format"
+import {generateFunctionPoints} from "@/lib/function-expression"
 import type {
   ActivationFunction,
-  FunctionGraphPoint,
   FunctionApproximationRequest,
   FunctionApproximationResponse,
+  FunctionGraphPoint,
 } from "@/types/function-playground"
 
 const initialForm: FunctionApproximationRequest = {
@@ -71,9 +71,7 @@ export function FunctionApproximationPlayground() {
     return layerSizes.slice(1).reduce((total, currentLayerSize, index) => {
       const previousLayerSize = layerSizes[index]
       const weights = previousLayerSize * currentLayerSize
-      const biases = currentLayerSize
-
-      return total + weights + biases
+      return total + weights + currentLayerSize
     }, 0)
   }
 

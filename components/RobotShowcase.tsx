@@ -11,8 +11,6 @@ const RobotMascotScene = dynamic(() => import("@/components/RobotMascotScene"), 
   ),
 })
 
-const emotionLabels = ["Happy", "Sad", "Surprised", "Thinking", "Excited", "Idle"]
-
 export function RobotShowcase() {
   return (
     <section className="relative overflow-hidden px-6 py-16 sm:px-8 sm:py-20 bg-background text-foreground">

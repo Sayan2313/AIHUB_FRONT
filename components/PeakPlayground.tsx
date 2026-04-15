@@ -2,7 +2,7 @@
 
 import type { FormEvent } from "react"
 import { useState, useRef, useEffect } from "react"
-import { buildApiUrl } from "@/lib/api"
+import { buildApiUrl, extractFetchError } from "@/lib/api"
 import { formatDurationMs } from "@/lib/format"
 import { buildPeakRequest, peakApiPath, peakSamplePrompts } from "@/lib/peak"
 import type { PeakPrediction, PeakResponse } from "@/types/peak-playground"
@@ -65,7 +65,8 @@ export function PeakPlayground() {
       })
 
       if (!response.ok) {
-        throw new Error("Backend request failed.")
+        const detail = await extractFetchError(response, "Backend request failed")
+        throw new Error(detail)
       }
 
       const payload = (await response.json()) as PeakResponse
@@ -78,7 +79,7 @@ export function PeakPlayground() {
 
       const assistantMessage: ChatMessage = {
         role: "assistant",
-        content: prediction.response,
+        content: prediction.response ?? "(empty response)",
         trainTimeMs: prediction.trainTimeMs,
       }
 
