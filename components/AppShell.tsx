@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/Navbar"
+import React from "react";
 
 interface AppShellProps {
   children: React.ReactNode

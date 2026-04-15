@@ -227,7 +227,7 @@
   letter-spacing: 0.06em;
   color: var(--background);
   background: var(--foreground);
-  border: 3.5px solid var(--background);
+  border: 4px solid var(--background);
   border-radius: 28px;
   box-shadow:
     4px 4px 0 var(--border),

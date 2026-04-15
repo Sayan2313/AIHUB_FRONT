@@ -43,6 +43,7 @@ export const modelOptions: ModelOption[] = [
     capabilities: ["text"],
     latency: "Low",
     pricing: pricingSymbol + "101",
+    playgroundPath: "/playground/peak",
   },
 
 ]
