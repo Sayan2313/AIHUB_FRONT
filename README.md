@@ -1,0 +1,1 @@
+This project made with next.js
