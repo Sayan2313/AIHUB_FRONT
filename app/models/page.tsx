@@ -1,4 +1,4 @@
-import {getModelsInfo} from "@/services/api-client";
+import {getModelsInfo} from "@/lib/api-client";
 import ModelsContent from "@/app/models/_components/ModelsContent";
 import {notFound} from "next/navigation";
 import {Model} from "@/types/models";

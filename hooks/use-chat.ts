@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {ChatMessage, ChatResponse} from "@/types/models";
-import {postChatRequest} from "@/services/api-client";
+import {postChatRequest} from "@/lib/api-client";
 
 
 export default function useChat() {

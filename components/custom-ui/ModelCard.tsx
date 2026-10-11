@@ -8,7 +8,7 @@ import { useRef, MouseEvent } from "react";
 import { Zap, ArrowRight, Construction, Sparkles, Activity } from "lucide-react";
 
 // Only Phi is live — all others are under development
-const LIVE_MODELS = ["Phi"];
+const LIVE_MODELS = ["Phi","Peak"];
 
 export default function ModelCard({
     name,
@@ -94,8 +94,8 @@ export default function ModelCard({
                 whileHover={{ scale: 1.02, y: -6 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as const }}
                 className={`group relative flex h-full flex-col overflow-hidden rounded-[28px] border bg-white/[0.035] backdrop-blur-2xl p-6 shadow-2xl transition-[border-color,box-shadow] duration-500 ${isLive
-                        ? "border-white/[0.08] hover:border-violet-500/40 hover:shadow-[0_25px_70px_-15px_rgba(139,92,246,.35)]"
-                        : "border-white/[0.06] opacity-85 hover:opacity-100 hover:border-amber-500/25 hover:shadow-[0_25px_70px_-15px_rgba(245,158,11,.2)]"
+                        ? "border-white/8 hover:border-violet-500/40 hover:shadow-[0_25px_70px_-15px_rgba(139,92,246,.35)]"
+                        : "border-white/6 opacity-85 hover:opacity-100 hover:border-amber-500/25 hover:shadow-[0_25px_70px_-15px_rgba(245,158,11,.2)]"
                     }`}
             >
                 {/* ── Ambient depth shadow beneath the card (grows on hover) ── */}
@@ -180,8 +180,8 @@ export default function ModelCard({
                         <Image
                             src={`${name}.svg` || "AIHUB.svg"}
                             alt={`${name} logo`}
-                            width={34}
-                            height={34}
+                            width={40}
+                            height={40}
                             className="object-contain drop-shadow-lg"
                             onError={(e) => {
                                 e.currentTarget.src = "/AIHUB.svg";
@@ -228,7 +228,7 @@ export default function ModelCard({
                     {capabilities.map((cap) => (
                         <span
                             key={cap}
-                            className="rounded-lg border border-white/[0.07] bg-white/[0.045] px-2.5 py-1 text-[11px] font-medium text-neutral-300 shadow-sm transition-all duration-200 group-hover:border-white/[0.12] group-hover:bg-white/[0.06] group-hover:text-white"
+                            className="rounded-lg border border-white/[0.07] bg-white/4.5 px-2.5 py-1 text-[11px] font-medium text-neutral-300 shadow-sm transition-all duration-200 group-hover:border-white/[0.12] group-hover:bg-white/[0.06] group-hover:text-white"
                         >
                             {cap}
                         </span>
@@ -236,7 +236,7 @@ export default function ModelCard({
                 </div>
 
                 {/* ── Divider ── */}
-                <div className="relative z-10 mt-5 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+                <div className="relative z-10 mt-5 h-px bg-linear-to-r from-transparent via-white/8 to-transparent" />
 
                 {/* ── Bottom Row ── */}
                 <div
@@ -291,7 +291,7 @@ export default function ModelCard({
                             </motion.button>
                         </Link>
                     ) : (
-                        <div className="flex items-center gap-1.5 rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-2 text-xs font-medium text-neutral-500 cursor-not-allowed">
+                        <div className="flex items-center gap-1.5 rounded-xl border border-white/6 bg-white/3 px-4 py-2 text-xs font-medium text-neutral-500 cursor-not-allowed">
                             <Construction className="size-3" />
                             In Development
                         </div>
@@ -300,7 +300,7 @@ export default function ModelCard({
 
                 {/* ── Under-development overlay tint ── */}
                 {!isLive && (
-                    <div className="pointer-events-none absolute inset-0 z-[1] rounded-[28px] bg-black/20" />
+                    <div className="pointer-events-none absolute inset-0 z-1 rounded-[28px] bg-black/20" />
                 )}
             </motion.div>
         </div>

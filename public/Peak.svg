@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" aria-labelledby="title desc">
+  <title>PEAK LM logo</title>
+  <desc>
+    A faceted blue and cyan mountain peak with a sweeping orbital ring, above the PEAK LM wordmark.
+  </desc>
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8af4ff"/>
+      <stop offset=".48" stop-color="#159bff"/>
+      <stop offset="1" stop-color="#2735d8"/>
+    </linearGradient>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5ffff"/>
+      <stop offset=".45" stop-color="#66dfff"/>
+      <stop offset="1" stop-color="#6544f5"/>
+    </linearGradient>
+    <linearGradient id="c" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#236bff"/>
+      <stop offset=".52" stop-color="#53f1ff"/>
+      <stop offset="1" stop-color="#a14bff"/>
+    </linearGradient>
+    <linearGradient id="d" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#bbd8ff"/>
+    </linearGradient>
+  </defs>
+  <path d="m178 418 215-276 222 276-101-58-121-145-111 146Z" fill="url(#a)" transform="translate(0 8)"/>
+  <path d="m393 142 222 276-101-58-121-145Z" fill="url(#b)" transform="translate(0 8)"/>
+  <path d="m178 426 215-203-67 140Z" fill="#0b48d8" opacity=".72"/>
+  <path d="m393 223 121 145-70-20-51-46Z" fill="#16d9f5" opacity=".85"/>
+  <path d="M393 150v73L282 369Z" fill="#9cf8ff" opacity=".52"/>
+  <path d="M172 427c111-6 310-30 418-87 38-20 34-48-24-65 84 11 117 51 67 86-93 66-310 86-461 66" fill="url(#c)" transform="translate(0 8)"/>
+  <path d="M172 435c139-10 321-35 418-87" fill="none" stroke="#8af7ff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+  <path d="M393 90c8 22 14 28 36 36-22 8-28 14-36 36-8-22-14-28-36-36 22-8 28-14 36-36" fill="#72edff"/>
+  <g fill="url(#d)">
+    <path d="M183 515h74c29 0 43 14 43 37s-14 37-43 37h-43v42h-31Zm31 26v22h41c9 0 14-4 14-11s-5-11-14-11Z"/>
+    <path d="M326 515h109l-19 25h-59v17h60l-18 23h-42v26h78l-19 25h-90Z"/>
+    <path d="m448 631 62-116h26l62 116h-34l-16-31h-51l-16 31Zm61-54h27l-13-27Z"/>
+    <path d="M622 515h31v43l50-43h41l-62 50 64 66h-42l-51-52v52h-31Z"/>
+  </g>
+  <path d="m523 586 12 12-12 12-12-12Z" fill="url(#c)"/>
+</svg>
